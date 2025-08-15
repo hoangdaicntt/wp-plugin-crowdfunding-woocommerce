@@ -1,0 +1,593 @@
+/* Admin styles cho plugin Từ thiện */
+
+/* General wrapper styles */
+.wrap {
+    margin-right: 20px;
+}
+
+/* Form wrappers */
+.charity-campaign-form-wrapper,
+.charity-donation-form-wrapper {
+    background: #fff;
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px solid #c3c4c7;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+}
+
+.charity-campaigns-list,
+.charity-donations-list {
+    margin-top: 20px;
+}
+
+/* Form styles */
+.charity-form {
+    max-width: 100%;
+}
+
+.charity-form .form-table {
+    background: #fff;
+}
+
+.charity-form .form-table th {
+    width: 200px;
+    padding: 20px 10px 20px 0;
+    vertical-align: top;
+}
+
+.charity-form .form-table td {
+    padding: 15px 10px;
+    line-height: 1.5;
+}
+
+.charity-form .required {
+    color: #dc3232;
+    font-weight: bold;
+}
+
+.charity-form input[type="text"],
+.charity-form input[type="email"],
+.charity-form input[type="tel"],
+.charity-form input[type="number"],
+.charity-form select,
+.charity-form textarea {
+    width: 100%;
+    max-width: 400px;
+}
+
+.charity-form textarea.large-text {
+    width: 100%;
+    max-width: 600px;
+}
+
+.charity-form .description {
+    color: #666;
+    font-style: italic;
+    margin-top: 5px;
+}
+
+/* Image upload */
+#campaign_image_preview {
+    margin-bottom: 15px;
+    min-height: 20px;
+}
+
+#campaign_image_preview img {
+    max-width: 200px;
+    height: auto;
+    border: 1px solid #ddd;
+    padding: 5px;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+#upload_image_button,
+#remove_image_button {
+    margin-right: 10px;
+}
+
+/* Message boxes */
+#charity-message {
+    margin-top: 20px;
+}
+
+#charity-message.success {
+    background: #d4edda;
+    border-left: 4px solid #28a745;
+    padding: 12px;
+    margin: 20px 0;
+}
+
+#charity-message.error {
+    background: #f8d7da;
+    border-left: 4px solid #dc3545;
+    padding: 12px;
+    margin: 20px 0;
+}
+
+/* Table styles */
+.wp-list-table {
+    margin-top: 20px;
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+}
+
+.wp-list-table thead th {
+    font-weight: 600;
+    background: #f9f9f9;
+    border-bottom: 1px solid #ddd;
+}
+
+.wp-list-table tbody tr:hover {
+    background: #f7f7f7;
+}
+
+.wp-list-table img {
+    border-radius: 4px;
+    vertical-align: middle;
+}
+
+/* Progress bar */
+.progress-bar {
+    background: #e0e0e0;
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 5px 0;
+    position: relative;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    text-align: center;
+    color: white;
+    line-height: 20px;
+    font-size: 11px;
+    font-weight: bold;
+    transition: width 0.3s ease;
+    background: linear-gradient(90deg, #007cba, #005a87);
+    min-width: 30px;
+    position: relative;
+}
+
+.progress-bar-fill:after {
+    content: attr(data-progress);
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+}
+
+/* Status badges */
+.campaign-status,
+.donation-status {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.campaign-status.status-active,
+.donation-status.status-completed {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.campaign-status.status-draft,
+.donation-status.status-pending {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+.donation-status.status-processing {
+    background: #cce5ff;
+    color: #004085;
+    border: 1px solid #b8daff;
+}
+
+.donation-status.status-cancelled {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Stats box */
+.charity-stats-box {
+    margin-top: 30px;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+}
+
+.charity-stats-box h2 {
+    margin-top: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e1e1e1;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* Stats grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.stat-card {
+    padding: 20px;
+    background: #f8f9fa;
+    border-left: 4px solid #007cba;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.stat-card h3 {
+    margin: 0 0 10px 0;
+    color: #666;
+    font-size: 14px;
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-card .stat-value {
+    font-size: 28px;
+    margin: 0;
+    font-weight: bold;
+    color: #2c3e50;
+    line-height: 1.2;
+}
+
+/* Different colors for stat cards */
+.stat-card:nth-child(1) { border-left-color: #007cba; }
+.stat-card:nth-child(2) { border-left-color: #28a745; }
+.stat-card:nth-child(3) { border-left-color: #17a2b8; }
+.stat-card:nth-child(4) { border-left-color: #ffc107; }
+.stat-card:nth-child(5) { border-left-color: #dc3545; }
+.stat-card:nth-child(6) { border-left-color: #6f42c1; }
+
+/* Tablenav (filters) */
+.tablenav {
+    padding: 10px 0;
+    clear: both;
+    margin: 20px 0;
+}
+
+.tablenav .actions {
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+.tablenav select,
+.tablenav input[type="date"] {
+    margin-right: 6px;
+    vertical-align: middle;
+    height: 32px;
+    line-height: 30px;
+    padding: 0 8px;
+}
+
+.tablenav .button {
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+.tablenav .button .dashicons {
+    vertical-align: middle;
+    margin-right: 3px;
+    margin-top: -2px;
+}
+
+/* Action buttons in table */
+.wp-list-table .button-small {
+    padding: 4px 8px;
+    height: auto;
+    margin: 0 2px;
+}
+
+.wp-list-table .button-small .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+}
+
+/* Delete button special style */
+.delete-campaign-btn,
+.delete-donation-btn {
+    color: #dc3545;
+    border-color: #dc3545;
+}
+
+.delete-campaign-btn:hover,
+.delete-donation-btn:hover {
+    background: #dc3545;
+    color: #fff;
+    border-color: #dc3545;
+}
+
+/* Loading spinner */
+.charity-loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #007cba;
+    border-radius: 50%;
+    animation: charity-spin 1s linear infinite;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+@keyframes charity-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Submit area */
+.submit {
+    padding: 20px 0;
+    margin: 20px 0;
+    border-top: 1px solid #ddd;
+}
+
+.submit .button {
+    margin-right: 10px;
+}
+
+/* Notice styles */
+.notice {
+    margin: 15px 0;
+}
+
+/* Empty state */
+.wp-list-table td[colspan] {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+    font-size: 14px;
+}
+
+.wp-list-table td[colspan] a {
+    margin-left: 5px;
+}
+
+/* Raised amount calculation styles */
+#raised-calculation-info {
+    border-radius: 4px;
+}
+
+#raised-calculation-info ul {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+#raised-calculation-info li {
+    margin: 5px 0;
+    font-size: 13px;
+}
+
+/* Highlight effect for changed input */
+.highlight-change {
+    background-color: #ffffe0 !important;
+    border-color: #007cba !important;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 5px rgba(0, 124, 186, 0.3) !important;
+}
+
+/* Recalculate button styling */
+#recalculate_raised_btn {
+    white-space: nowrap;
+    min-width: 180px;
+}
+
+#recalculate_raised_btn .dashicons {
+    line-height: inherit;
+    vertical-align: text-top;
+}
+
+/* Flexible layout for raised amount field */
+.raised-amount-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.raised-amount-controls .regular-text {
+    flex: 1;
+    min-width: 200px;
+}
+
+/* Settings page styles */
+.charity-settings-wrapper {
+    background: #fff;
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px solid #c3c4c7;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+}
+
+.product-stats-box {
+    background: #f8f9fa;
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+}
+
+.product-stats-box h3 {
+    margin-top: 0;
+    color: #495057;
+    font-size: 16px;
+}
+
+.import-products-section {
+    margin-top: 10px;
+}
+
+#import_options {
+    border-radius: 4px;
+}
+
+#import_progress {
+    margin-top: 20px;
+    padding: 15px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#import_progress .progress-bar {
+    height: 25px;
+    margin: 10px 0;
+    background: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+#import_progress .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #28a745, #20c997);
+    color: white;
+    text-align: center;
+    line-height: 25px;
+    font-weight: bold;
+    transition: width 0.5s ease;
+}
+
+#import_status {
+    margin-top: 15px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+#start_import_btn {
+    color: #007cba;
+    border-color: #007cba;
+}
+
+#start_import_btn:hover {
+    background: #007cba;
+    color: #fff;
+}
+
+#start_import_btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Settings form specific styles */
+.charity-settings-wrapper .form-table th {
+    width: 250px;
+}
+
+.charity-settings-wrapper h2 {
+    border-bottom: 1px solid #e1e1e1;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    color: #23282d;
+}
+
+/* Responsive design */
+@media screen and (max-width: 1200px) {
+    .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+}
+
+@media screen and (max-width: 782px) {
+    .wrap {
+        margin-right: 10px;
+    }
+
+    .charity-form .form-table th {
+        display: block;
+        width: 100%;
+        padding-bottom: 5px;
+    }
+
+    .charity-form .form-table td {
+        display: block;
+        width: 100%;
+        padding-left: 0;
+    }
+
+    .charity-form input[type="text"],
+    .charity-form input[type="email"],
+    .charity-form input[type="tel"],
+    .charity-form input[type="number"],
+    .charity-form select,
+    .charity-form textarea {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tablenav .actions {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .tablenav select,
+    .tablenav input[type="date"] {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .wp-list-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .stat-card .stat-value {
+        font-size: 24px;
+    }
+
+    .charity-stats-box h2 {
+        font-size: 16px;
+    }
+}
+
+/* Print styles */
+@media print {
+    .tablenav,
+    .page-title-action,
+    .submit,
+    .wp-list-table .button-small {
+        display: none;
+    }
+
+    .wp-list-table {
+        border: 1px solid #000;
+    }
+
+    .wp-list-table th,
+    .wp-list-table td {
+        border: 1px solid #000;
+        padding: 5px;
+    }
+}
