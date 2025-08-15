@@ -29,6 +29,9 @@ class CharityFrontend {
         // Hiển thị thông tin chiến dịch trên trang single product
         add_action('woocommerce_single_product_summary', array($this, 'display_campaign_info'), 25);
 
+        // Hiển thị thông tin chiến dịch trong shop loop
+        add_action('woocommerce_after_shop_loop_item_title', array($this, 'display_campaign_info_in_loop'), 15);
+
         // Ẩn giá cho sản phẩm từ thiện
         add_filter('woocommerce_get_price_html', array($this, 'modify_price_display'), 10, 2);
 
@@ -82,6 +85,46 @@ class CharityFrontend {
             <p style="margin: 5px 0;">
                 <strong>Tỉ lệ:</strong> <?php echo $progress; ?>%
             </p>
+        </div>
+        <?php
+    }
+
+    /**
+     * Hiển thị thông tin chiến dịch từ thiện trong shop loop
+     */
+    public function display_campaign_info_in_loop() {
+        global $product;
+
+        // Kiểm tra xem có phải chiến dịch từ thiện không
+        if (!$product || $product->get_meta('_is_charity_campaign') !== 'yes') {
+            return;
+        }
+
+        $goal = floatval($product->get_meta('_charity_goal'));
+        $raised = floatval($product->get_meta('_charity_raised'));
+        $progress = $goal > 0 ? min(round(($raised / $goal) * 100, 2), 100) : 0;
+
+        ?>
+        <div class="charity-campaign-info-loop" style="margin: 10px 0;">
+            <!-- Progress bar -->
+            <div class="charity-progress-bar" style="background: #e9ecef; border-radius: 4px; overflow: hidden; height: 8px; margin-bottom: 8px;">
+                <div class="charity-progress" style="background: #da0055; height: 100%; width: <?php echo $progress; ?>%; transition: width 0.3s ease;"></div>
+            </div>
+
+            <!-- Số tiền và phần trăm song song -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                <span style="font-weight: bold; color: #da0055; font-size: 14px;">
+                    <?php echo number_format($raised, 0, ',', '.'); ?>đ
+                </span>
+                <span style="font-weight: bold; color: #007cba; font-size: 14px;">
+                    <?php echo $progress; ?>%
+                </span>
+            </div>
+
+            <!-- Mục tiêu -->
+            <div style="font-size: 12px; color: #666;">
+                với mục tiêu: <?php echo number_format($goal, 0, ',', '.'); ?>đ
+            </div>
         </div>
         <?php
     }

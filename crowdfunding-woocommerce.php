@@ -58,6 +58,9 @@ class CharityWooCommerce {
         add_action('admin_menu', array($this, 'add_admin_menu'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
 
+        // Ẩn menu WooCommerce và Sản phẩm
+        add_action('admin_menu', array($this, 'hide_woocommerce_menus'), 999);
+
         // Khởi tạo các module
         add_action('init', array($this, 'init_modules'));
     }
@@ -224,6 +227,54 @@ class CharityWooCommerce {
             return 0;
         }
         return min(round(($raised / $goal) * 100, 2), 100);
+    }
+
+    /**
+     * Ẩn menu WooCommerce và Sản phẩm
+     */
+    public function hide_woocommerce_menus() {
+        // Ẩn menu chính WooCommerce
+        remove_menu_page('woocommerce');
+
+        // Ẩn menu Sản phẩm
+        remove_menu_page('edit.php?post_type=product');
+
+        // Ẩn menu Orders
+        remove_menu_page('edit.php?post_type=shop_order');
+
+        // Ẩn menu Coupons
+        remove_menu_page('edit.php?post_type=shop_coupon');
+
+        // Ẩn menu Marketing
+        remove_menu_page('woocommerce-marketing');
+
+        // Ẩn menu Analytics
+        remove_menu_page('wc-admin&path=/analytics/overview');
+
+        // Ẩn các submenu liên quan đến WooCommerce
+        remove_submenu_page('woocommerce', 'wc-admin&path=/analytics/overview');
+        remove_submenu_page('woocommerce', 'wc-reports');
+        remove_submenu_page('woocommerce', 'wc-settings');
+        remove_submenu_page('woocommerce', 'wc-status');
+        remove_submenu_page('woocommerce', 'wc-addons');
+
+        // Ẩn các submenu của Products
+        remove_submenu_page('edit.php?post_type=product', 'post-new.php?post_type=product');
+        remove_submenu_page('edit.php?post_type=product', 'edit-tags.php?taxonomy=product_cat&post_type=product');
+        remove_submenu_page('edit.php?post_type=product', 'edit-tags.php?taxonomy=product_tag&post_type=product');
+        remove_submenu_page('edit.php?post_type=product', 'product_attributes');
+
+        // Ẩn menu Payments và Settings
+        global $submenu;
+        if (isset($submenu['woocommerce'])) {
+            foreach ($submenu['woocommerce'] as $key => $menu_item) {
+                if (strpos($menu_item[2], 'wc-settings') !== false ||
+                    strpos($menu_item[2], 'checkout') !== false ||
+                    strpos($menu_item[2], 'PAYMENTS_MENU_ITEM') !== false) {
+                    unset($submenu['woocommerce'][$key]);
+                }
+            }
+        }
     }
 }
 
