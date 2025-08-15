@@ -188,9 +188,19 @@ class CharityCampaigns {
                             <label for="campaign_short_desc"><?php _e('Mô tả ngắn', 'charity-woocommerce'); ?></label>
                         </th>
                         <td>
-                            <textarea id="campaign_short_desc" name="campaign_short_desc" class="large-text" rows="3"><?php
-                                echo $is_edit ? esc_textarea($campaign->get_short_description()) : '';
-                            ?></textarea>
+                            <?php
+                            $short_content = $is_edit ? $campaign->get_short_description() : '';
+                            wp_editor($short_content, 'campaign_short_desc', array(
+                                'textarea_name' => 'campaign_short_desc',
+                                'textarea_rows' => 5,
+                                'media_buttons' => false,
+                                'teeny' => true,
+                                'tinymce' => array(
+                                    'toolbar1' => 'bold,italic,underline,strikethrough,bullist,numlist,link,unlink,undo,redo',
+                                    'toolbar2' => ''
+                                )
+                            ));
+                            ?>
                         </td>
                     </tr>
 

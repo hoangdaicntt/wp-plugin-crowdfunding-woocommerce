@@ -1,177 +1,169 @@
-# Từ thiện WooCommerce Plugin
+# Charity WooCommerce Plugin
 
-Plugin tạo hệ thống gây quỹ từ thiện (crowdfunding) tích hợp với WooCommerce, cho phép tạo và quản lý các chiến dịch từ thiện trực tuyến.
+A plugin to create a charity crowdfunding system integrated with WooCommerce, allowing you to create and manage online charity campaigns.
 
 ![img.png](demo/img.png)
 
-## Tính năng chính
+## Main Features
 
-### 🎯 Quản lý Chiến dịch Từ thiện
-- Tạo và quản lý các chiến dịch gây quỹ từ thiện
-- Thiết lập mục tiêu số tiền cần quyên góp
-- Theo dõi tiến độ quyên góp realtime
-- Upload hình ảnh và mô tả chiến dịch
+### 🎯 Charity Campaign Management
+- Create and manage charity fundraising campaigns
+- Set fundraising goals
+- Track donation progress in real time
+- Upload campaign images and descriptions
 
-### 💰 Hệ thống Ủng hộ
-- Form ủng hộ với các mức tiền đề xuất
-- Tùy chọn ủng hộ ẩn danh
-- Xử lý thanh toán qua WooCommerce
-- Hiển thị danh sách người ủng hộ
+### 💰 Donation System
+- Donation form with suggested amounts
+- Option for anonymous donations
+- Payment processing via WooCommerce
+- Display list of donors
 
-### 📊 Theo dõi và Báo cáo
-- Thanh tiến độ (progress bar) trực quan
-- Thống kê số tiền đã quyên góp và phần trăm hoàn thành
-- Danh sách chi tiết các khoản ủng hộ
-- Báo cáo tổng hợp chiến dịch
+### 📊 Tracking and Reporting
+- Visual progress bar
+- Statistics for total donations and completion percentage
+- Detailed list of donations
+- Campaign summary reports
 
-### 🎨 Tích hợp Frontend
-- Hiển thị thông tin chiến dịch trên trang sản phẩm
-- Progress bar và thống kê trong shop loop
-- Shortcode hiển thị danh sách người ủng hộ
+### 🎨 Frontend Integration
+- Display campaign information on product pages
+- Progress bar and statistics in shop loop
+- Shortcode to show donor list
 - Responsive design
 
-## Yêu cầu hệ thống
+## System Requirements
 
-- **WordPress:** 5.0 trở lên
-- **PHP:** 7.2 trở lên  
-- **WooCommerce:** 4.0 trở lên
+- **WordPress:** 5.0 or higher
+- **PHP:** 7.2 or higher  
+- **WooCommerce:** 4.0 or higher
 
-## Cài đặt
+## Installation
 
-1. **Tải plugin:**
+1. **Download the plugin:**
    ```bash
    git clone [repository-url] crowdfunding-woocommerce
    ```
 
-2. **Upload lên WordPress:**
-   - Nén thư mục plugin thành file ZIP
-   - Vào WordPress Admin → Plugins → Add New → Upload Plugin
-   - Chọn file ZIP và nhấn "Install Now"
+2. **Upload to WordPress:**
+   - Compress the plugin folder into a ZIP file
+   - Go to WordPress Admin → Plugins → Add New → Upload Plugin
+   - Select the ZIP file and click "Install Now"
 
-3. **Kích hoạt plugin:**
-   - Vào Plugins → Installed Plugins
-   - Tìm "Từ thiện WooCommerce" và nhấn "Activate"
+3. **Activate the plugin:**
+   - Go to Plugins → Installed Plugins
+   - Find "Charity WooCommerce" and click "Activate"
 
-## Cấu hình
+## Configuration
 
-### Thiết lập cơ bản
+### Basic Settings
 
-1. **Vào menu Từ thiện:**
-   - Sau khi kích hoạt, menu "Từ thiện" sẽ xuất hiện trong admin
-   - Menu WooCommerce gốc sẽ được ẩn để tập trung vào chức năng từ thiện
+1. **Go to Charity menu:**
+   - After activation, the "Charity" menu will appear in the admin
+   - The default WooCommerce menu will be hidden to focus on charity functions
 
-2. **Cấu hình cài đặt:**
-   - Vào Từ thiện → Cài đặt
-   - Thiết lập các tùy chọn cơ bản cho hệ thống
+2. **Configure settings:**
+   - Go to Charity → Settings
+   - Set up basic options for the system
 
-### Tạo chiến dịch mới
+### Create a New Campaign
 
-1. **Vào Từ thiện → Chiến dịch → Thêm mới**
-2. **Điền thông tin:**
-   - Tên chiến dịch
-   - Mô tả chi tiết
-   - Mục tiêu số tiền
-   - Hình ảnh minh họa
-3. **Xuất bản chiến dịch**
+1. **Go to Charity → Campaigns → Add New**
+2. **Fill in the information:**
+   - Campaign name
+   - Detailed description
+   - Fundraising goal
+   - Illustrative image
+3. **Publish the campaign**
 
-## Sử dụng
+## Usage
 
-### Tạo trang ủng hộ
+### Create a Donation Page
 
-Tạo một trang mới với slug `/ung-ho-ngay` để làm trang ủng hộ chính:
+Create a new page with the slug `/donate-today` to serve as the main donation page:
 
 ```php
-// Trang này sẽ tự động xử lý form ủng hộ và chuyển hướng thanh toán
+// This page will automatically handle the donation form and redirect to payment
 ```
 
-### Hiển thị danh sách người ủng hộ
+### Display Donor List
 
-Sử dụng shortcode trong bài viết hoặc trang:
+Use the shortcode in posts or pages:
 
 ```
 [danh_sach_ung_ho limit="10" show_anonymous="yes" show_date="yes" show_amount="yes"]
 ```
 
-**Tham số shortcode:**
-- `limit`: Số lượng người ủng hộ hiển thị (mặc định: 10)
-- `show_anonymous`: Hiển thị người ủng hộ ẩn danh (yes/no, mặc định: yes)
-- `show_date`: Hiển thị ngày ủng hộ (yes/no, mặc định: yes) 
-- `show_amount`: Hiển thị số tiền ủng hộ (yes/no, mặc định: yes)
-- `order`: Sắp xếp theo thời gian (ASC/DESC, mặc định: DESC)
+**Shortcode parameters:**
+- `limit`: Number of donors to display (default: 10)
+- `show_anonymous`: Show anonymous donors (yes/no, default: yes)
+- `show_date`: Show donation date (yes/no, default: yes) 
+- `show_amount`: Show donation amount (yes/no, default: yes)
+- `order`: Sort by time (ASC/DESC, default: DESC)
 
-## Cấu trúc File
+## File Structure
 
 ```
 crowdfunding-woocommerce/
-├── crowdfunding-woocommerce.php    # File chính
-├── assets/                         # Tài nguyên
-│   ├── admin-script.js            # JavaScript admin
-│   ├── admin-style.css            # CSS admin
-│   └── frontend-style.css         # CSS frontend
-├── includes/                       # Classes chính
-│   ├── class-charity-campaigns.php    # Quản lý chiến dịch
-│   ├── class-charity-donations.php    # Xử lý ủng hộ
-│   ├── class-charity-frontend.php     # Hiển thị frontend
-│   └── class-charity-settings.php     # Cài đặt plugin
-└── README.md                       # Tài liệu này
+├── crowdfunding-woocommerce.php    # Main file
+├── assets/                         # Resources
+│   ├── admin-script.js            # Admin JavaScript
+│   ├── admin-style.css            # Admin CSS
+│   └── frontend-style.css         # Frontend CSS
+├── includes/                       # Core Classes
+│   ├── class-charity-campaigns.php    # Campaign management
+│   ├── class-charity-donations.php    # Donation processing
+│   ├── class-charity-frontend.php     # Frontend display
+│   └── class-charity-settings.php     # Plugin settings
+└── README.md                       # This documentation
 ```
 
-## API và Hooks
+## API and Hooks
 
-### Functions Helper
-
-```php
-// Lấy thông tin chiến dịch
-$campaign = charity_get_campaign($campaign_id);
-
-// Lấy số tiền đã quyên góp
-$raised = charity_get_campaign_raised($campaign_id);
-
-// Lấy mục tiêu chiến dịch
-$goal = charity_get_campaign_goal($campaign_id);
-```
-
-### Actions và Filters
+### Actions and Filters
 
 ```php
-// Hook sau khi tạo chiến dịch thành công
+// Hook after a campaign is created
 add_action('charity_campaign_created', 'your_function');
 
-// Filter để thay đổi text nút ủng hộ
+// Filter to change the donation button text
 add_filter('charity_donate_button_text', 'your_function');
 
-// Hook sau khi ủng hộ thành công
+// Hook after a donation is completed
 add_action('charity_donation_completed', 'your_function', 10, 2);
 ```
 
-## Tùy chỉnh
+For advanced usage, refer to the class methods in:
+- `includes/class-charity-campaigns.php` for campaign management
+- `includes/class-charity-donations.php` for donation processing
+- `includes/class-charity-frontend.php` for frontend display
 
-### CSS Classes chính
+## Customization
+
+### Core CSS Classes
 
 ```css
-.charity-campaign-info          /* Container thông tin chiến dịch */
-.charity-progress-bar           /* Thanh tiến độ */
-.charity-progress               /* Phần đã hoàn thành */
-.charity-donate-button          /* Nút ủng hộ */
-.charity-donors-list            /* Danh sách người ủng hộ */
-.charity-campaign-info-loop     /* Thông tin trong shop loop */
+.charity-campaign-info          /* Campaign information container */
+.charity-progress-bar           /* Progress bar */
+.charity-progress               /* Completed portion */
+.charity-donate-button          /* Donate button */
+.charity-donors-list            /* Donor list */
+.charity-campaign-info-loop     /* Info in shop loop */
 ```
 
-### Tùy chỉnh template
+### Template Customization
 
-Plugin sẽ tự động hiển thị thông tin chiến dịch, nhưng bạn có thể tùy chỉnh bằng cách:
+The plugin will automatically display campaign information, but you can customize it by:
 
-1. **Override trong theme:**
+1. **Overriding in the theme:**
    ```php
-   // functions.php của theme
+   // functions.php of the theme
    function custom_charity_display() {
-       // Code tùy chỉnh
+       // Custom code
    }
    ```
 
-2. **Sử dụng CSS:**
+2. **Using CSS:**
    ```css
-   /* Trong style.css của theme */
+   /* In style.css of the theme */
    .charity-progress-bar {
        height: 15px;
        background: #custom-color;
@@ -180,27 +172,27 @@ Plugin sẽ tự động hiển thị thông tin chiến dịch, nhưng bạn c�
 
 ## Troubleshooting
 
-### Lỗi thường gặp
+### Common Issues
 
-**1. Plugin không hoạt động:**
-- Kiểm tra WooCommerce đã được cài và kích hoạt
-- Đảm bảo phiên bản PHP >= 7.2
+**1. Plugin not working:**
+- Check if WooCommerce is installed and activated
+- Ensure PHP version is >= 7.2
 
-**2. Không thấy menu Từ thiện:**
-- Kiểm tra quyền user (cần manage_options)
-- Deactivate và activate lại plugin
+**2. Charity menu not visible:**
+- Check user permissions (needs manage_options)
+- Deactivate and reactivate the plugin
 
-**3. Progress bar không hiển thị:**
-- Kiểm tra sản phẩm đã được đánh dấu là chiến dịch từ thiện
-- Kiểm tra meta fields `_is_charity_campaign`, `_charity_goal`, `_charity_raised`
+**3. Progress bar not displaying:**
+- Ensure the product is marked as a charity campaign
+- Check meta fields `_is_charity_campaign`, `_charity_goal`, `_charity_raised`
 
-**4. Thanh toán không hoạt động:**
-- Kiểm tra WooCommerce payment gateways
-- Đảm bảo trang `/ung-ho-ngay` tồn tại
+**4. Payment not working:**
+- Check WooCommerce payment gateways
+- Ensure the `/donate-today` page exists
 
 ### Debug Mode
 
-Bật debug bằng cách thêm vào `wp-config.php`:
+Enable debug by adding to `wp-config.php`:
 
 ```php
 define('WP_DEBUG', true);
@@ -210,21 +202,20 @@ define('WP_DEBUG_LOG', true);
 ## Changelog
 
 ### Version 1.0.4 (Current)
-- ✅ Ẩn menu WooCommerce trong admin
-- ✅ Thêm hook hiển thị thông tin trong shop loop  
-- ✅ Cải thiện UI/UX progress bar
-- ✅ Tối ưu hóa shortcode danh sách ủng hộ
+- ✅ Hide WooCommerce menu in admin
+- ✅ Add hook to display information in shop loop  
+- ✅ Improve UI/UX of progress bar
+- ✅ Optimize shortcode for donor list
 
 ### Version 1.0.1
-- 🎯 Phiên bản đầu tiên
-- 📊 Chức năng cơ bản quản lý chiến dịch
-- 💰 Hệ thống ủng hộ và thanh toán
+- 🎯 First version
+- 📊 Basic campaign management functions
+- 💰 Donation and payment system
 
-## Hỗ trợ
+## Support
 
-- **Email:** [your-email@domain.com]
-- **Documentation:** [Link tài liệu chi tiết]
-- **Issues:** [Link GitHub Issues]
+- **Email:** [hoangdaicntt@gmail.com](mailto:hoangdaicntt@gmail.com)
+- **Issues:** [GitHub Issues]()
 
 ## License
 
@@ -232,4 +223,4 @@ GPL v2 or later
 
 ---
 
-**Lưu ý:** Plugin này được phát triển để tích hợp với WooCommerce. Đảm bảo backup website trước khi cài đặt trên môi trường production.
+**Note:** This plugin is developed to integrate with WooCommerce. Ensure you backup your website before installing on a production environment.

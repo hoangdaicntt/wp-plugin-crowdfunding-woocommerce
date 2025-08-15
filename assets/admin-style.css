@@ -12,7 +12,7 @@
     padding: 20px;
     margin-top: 20px;
     border: 1px solid #c3c4c7;
-    box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
 }
 
 .charity-campaigns-list,
@@ -78,7 +78,7 @@
     border: 1px solid #ddd;
     padding: 5px;
     background: #fff;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 #upload_image_button,
@@ -110,7 +110,7 @@
     margin-top: 20px;
     background: #fff;
     border: 1px solid #c3c4c7;
-    box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
 }
 
 .wp-list-table thead th {
@@ -203,7 +203,7 @@
     padding: 20px;
     background: #fff;
     border: 1px solid #c3c4c7;
-    box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
 }
 
 .charity-stats-box h2 {
@@ -232,7 +232,7 @@
 
 .stat-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .stat-card h3 {
@@ -253,12 +253,29 @@
 }
 
 /* Different colors for stat cards */
-.stat-card:nth-child(1) { border-left-color: #007cba; }
-.stat-card:nth-child(2) { border-left-color: #28a745; }
-.stat-card:nth-child(3) { border-left-color: #17a2b8; }
-.stat-card:nth-child(4) { border-left-color: #ffc107; }
-.stat-card:nth-child(5) { border-left-color: #dc3545; }
-.stat-card:nth-child(6) { border-left-color: #6f42c1; }
+.stat-card:nth-child(1) {
+    border-left-color: #007cba;
+}
+
+.stat-card:nth-child(2) {
+    border-left-color: #28a745;
+}
+
+.stat-card:nth-child(3) {
+    border-left-color: #17a2b8;
+}
+
+.stat-card:nth-child(4) {
+    border-left-color: #ffc107;
+}
+
+.stat-card:nth-child(5) {
+    border-left-color: #dc3545;
+}
+
+.stat-card:nth-child(6) {
+    border-left-color: #6f42c1;
+}
 
 /* Tablenav (filters) */
 .tablenav {
@@ -334,8 +351,12 @@
 }
 
 @keyframes charity-spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* Submit area */
@@ -396,8 +417,11 @@
 }
 
 #recalculate_raised_btn .dashicons {
-    line-height: inherit;
-    vertical-align: text-top;
+}
+
+.button {
+    display: inline-flex !important;
+    align-items: center;
 }
 
 /* Flexible layout for raised amount field */
@@ -419,7 +443,7 @@
     padding: 20px;
     margin-top: 20px;
     border: 1px solid #c3c4c7;
-    box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
 }
 
 .product-stats-box {
@@ -506,6 +530,11 @@
     color: #23282d;
 }
 
+.button.button-small {
+    display: inline-flex;
+    align-items: center;
+}
+
 /* Responsive design */
 @media screen and (max-width: 1200px) {
     .stats-grid {
@@ -537,7 +566,6 @@
     .charity-form select,
     .charity-form textarea {
         width: 100%;
-        max-width: 100%;
     }
 
     .stats-grid {
