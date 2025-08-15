@@ -52,62 +52,67 @@ class CharitySettings {
         ?>
 
         <div class="wrap">
-            <h1 class="wp-heading-inline"><?php _e('Cài đặt Từ thiện', 'charity-woocommerce'); ?></h1>
+            <h1 class="wp-heading-inline">Cài đặt Từ thiện</h1>
             <hr class="wp-header-end">
 
             <div class="charity-settings-wrapper">
-                <form id="charity-settings-form" class="charity-form">
-                    <input type="hidden" name="action" value="charity_save_settings" />
-                    <input type="hidden" name="nonce" value="<?php echo wp_create_nonce('charity_ajax_nonce'); ?>" />
+                <form id="charity-settings-form" class="charity-form" method="post" action="">
+                    <?php wp_nonce_field('charity_settings_nonce', 'charity_settings_nonce'); ?>
 
-                    <h2><?php _e('Cài đặt chung', 'charity-woocommerce'); ?></h2>
+                    <h2>Cài đặt chung</h2>
 
                     <table class="form-table">
                         <tr>
                             <th scope="row">
-                                <label for="enable_anonymous_donations"><?php _e('Cho phép ủng hộ ẩn danh', 'charity-woocommerce'); ?></label>
+                                <label for="enable_anonymous_donations">Cho phép ủng hộ ẩn danh</label>
                             </th>
                             <td>
                                 <label>
                                     <input type="checkbox" id="enable_anonymous_donations" name="enable_anonymous_donations" value="yes"
                                            <?php checked($enable_anonymous_donations, 'yes'); ?> />
-                                    <?php _e('Người dùng có thể chọn ủng hộ ẩn danh', 'charity-woocommerce'); ?>
+                                    Người dùng có thể chọn ủng hộ ẩn danh
                                 </label>
                             </td>
                         </tr>
 
                         <tr>
                             <th scope="row">
-                                <label for="default_goal_amount"><?php _e('Mục tiêu mặc định (VNĐ)', 'charity-woocommerce'); ?></label>
+                                <label for="default_goal_amount">Mục tiêu mặc định (VNĐ)</label>
                             </th>
                             <td>
                                 <input type="number" id="default_goal_amount" name="default_goal_amount"
                                        value="<?php echo esc_attr($default_goal_amount); ?>"
                                        min="0" step="1000" class="regular-text" />
                                 <p class="description">
-                                    <?php _e('Số tiền mục tiêu mặc định khi tạo chiến dịch mới', 'charity-woocommerce'); ?>
+                                    Số tiền mục tiêu mặc định khi tạo chiến dịch mới
                                 </p>
                             </td>
                         </tr>
                     </table>
 
-                    <h2><?php _e('Quản lý sản phẩm', 'charity-woocommerce'); ?></h2>
+                    <h2>Quản lý sản phẩm</h2>
 
                     <!-- Thống kê sản phẩm -->
-                    <div class="product-stats-box">
-                        <h3><?php _e('Thống kê sản phẩm hiện tại', 'charity-woocommerce'); ?></h3>
-                        <div class="stats-grid">
-                            <div class="stat-card">
-                                <h4><?php _e('Tổng sản phẩm', 'charity-woocommerce'); ?></h4>
-                                <p class="stat-value" id="total-products-count"><?php echo number_format($total_products); ?></p>
+                    <div class="product-stats-box" style="background: #f1f1f1; padding: 15px; margin: 20px 0; border-radius: 5px;">
+                        <h3>Thống kê sản phẩm hiện tại</h3>
+                        <div class="stats-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+                            <div class="stat-card" style="background: white; padding: 15px; border-radius: 5px; text-align: center;">
+                                <h4>Tổng sản phẩm</h4>
+                                <p class="stat-value" style="font-size: 24px; font-weight: bold; color: #2271b1;">
+                                    <?php echo number_format($total_products); ?>
+                                </p>
                             </div>
-                            <div class="stat-card">
-                                <h4><?php _e('Chiến dịch từ thiện', 'charity-woocommerce'); ?></h4>
-                                <p class="stat-value" id="charity-products-count"><?php echo number_format($charity_products); ?></p>
+                            <div class="stat-card" style="background: white; padding: 15px; border-radius: 5px; text-align: center;">
+                                <h4>Chiến dịch từ thiện</h4>
+                                <p class="stat-value" style="font-size: 24px; font-weight: bold; color: #00a32a;">
+                                    <?php echo number_format($charity_products); ?>
+                                </p>
                             </div>
-                            <div class="stat-card">
-                                <h4><?php _e('Sản phẩm thường', 'charity-woocommerce'); ?></h4>
-                                <p class="stat-value" id="regular-products-count"><?php echo number_format($regular_products); ?></p>
+                            <div class="stat-card" style="background: white; padding: 15px; border-radius: 5px; text-align: center;">
+                                <h4>Sản phẩm thường</h4>
+                                <p class="stat-value" style="font-size: 24px; font-weight: bold; color: #757575;">
+                                    <?php echo number_format($regular_products); ?>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -115,56 +120,56 @@ class CharitySettings {
                     <table class="form-table">
                         <tr>
                             <th scope="row">
-                                <label for="auto_set_campaign"><?php _e('Tự động đặt làm chiến dịch', 'charity-woocommerce'); ?></label>
+                                <label for="auto_set_campaign">Tự động đặt làm chiến dịch</label>
                             </th>
                             <td>
                                 <label>
                                     <input type="checkbox" id="auto_set_campaign" name="auto_set_campaign" value="yes"
                                            <?php checked($auto_set_campaign, 'yes'); ?> />
-                                    <?php _e('Tự động đặt sản phẩm mới thành chiến dịch từ thiện', 'charity-woocommerce'); ?>
+                                    Tự động đặt sản phẩm mới thành chiến dịch từ thiện
                                 </label>
                                 <p class="description">
-                                    <?php _e('Khi bật, tất cả sản phẩm mới sẽ được tự động đặt làm chiến dịch từ thiện', 'charity-woocommerce'); ?>
+                                    Khi bật, tất cả sản phẩm mới sẽ được tự động đặt làm chiến dịch từ thiện
                                 </p>
                             </td>
                         </tr>
 
                         <tr>
                             <th scope="row">
-                                <label for="import_all_products"><?php _e('Chuyển đổi sản phẩm hiện tại', 'charity-woocommerce'); ?></label>
+                                <label for="import_all_products">Chuyển đổi sản phẩm hiện tại</label>
                             </th>
                             <td>
                                 <div class="import-products-section">
                                     <label>
                                         <input type="checkbox" id="import_all_products" name="import_all_products" value="yes"
                                                <?php checked($import_all_products, 'yes'); ?> />
-                                        <?php _e('Chuyển đổi tất cả sản phẩm hiện tại thành chiến dịch từ thiện', 'charity-woocommerce'); ?>
+                                        Chuyển đổi tất cả sản phẩm hiện tại thành chiến dịch từ thiện
                                     </label>
 
                                     <div id="import_options" style="margin-top: 15px; padding: 15px; background: #f9f9f9; border-left: 4px solid #007cba; display: <?php echo $import_all_products === 'yes' ? 'block' : 'none'; ?>;">
-                                        <p><strong><?php _e('Tùy chọn chuyển đổi:', 'charity-woocommerce'); ?></strong></p>
+                                        <p><strong>Tùy chọn chuyển đổi:</strong></p>
 
                                         <?php if ($regular_products > 0) : ?>
-                                            <p><?php printf(__('Sẽ chuyển đổi <strong>%d sản phẩm</strong> thành chiến dịch từ thiện.', 'charity-woocommerce'), $regular_products); ?></p>
+                                            <p>Sẽ chuyển đổi <strong><?php echo $regular_products; ?> sản phẩm</strong> thành chiến dịch từ thiện.</p>
                                             <p class="description">
-                                                <?php _e('Các sản phẩm sẽ được thiết lập với mục tiêu mặc định và số tiền đã quyên góp bằng 0.', 'charity-woocommerce'); ?>
+                                                Các sản phẩm sẽ được thiết lập với mục tiêu mặc định và số tiền đã quyên góp bằng 0.
                                             </p>
 
                                             <button type="button" id="start_import_btn" class="button button-secondary">
                                                 <span class="dashicons dashicons-update"></span>
-                                                <?php _e('Bắt đầu chuyển đổi', 'charity-woocommerce'); ?>
+                                                Bắt đầu chuyển đổi
                                             </button>
 
                                             <div id="import_progress" style="display: none; margin-top: 15px;">
-                                                <p><strong><?php _e('Đang chuyển đổi...', 'charity-woocommerce'); ?></strong></p>
-                                                <div class="progress-bar">
-                                                    <div class="progress-bar-fill" id="import_progress_bar" style="width: 0%;">0%</div>
+                                                <p><strong>Đang chuyển đổi...</strong></p>
+                                                <div class="progress-bar" style="width: 100%; height: 20px; background: #ddd; border-radius: 10px; overflow: hidden;">
+                                                    <div class="progress-bar-fill" id="import_progress_bar" style="width: 0%; height: 100%; background: #007cba; transition: width 0.3s; text-align: center; color: white; line-height: 20px;">0%</div>
                                                 </div>
                                                 <div id="import_status"></div>
                                             </div>
                                         <?php else : ?>
                                             <p class="description">
-                                                <?php _e('Tất cả sản phẩm hiện tại đã là chiến dịch từ thiện.', 'charity-woocommerce'); ?>
+                                                Tất cả sản phẩm hiện tại đã là chiến dịch từ thiện.
                                             </p>
                                         <?php endif; ?>
                                     </div>
@@ -174,18 +179,48 @@ class CharitySettings {
                     </table>
 
                     <p class="submit">
-                        <button type="submit" class="button button-primary">
-                            <?php _e('Lưu cài đặt', 'charity-woocommerce'); ?>
+                        <button id="charity-settings-submit" type="submit" class="button button-primary">
+                            Lưu cài đặt
                         </button>
                         <button type="button" class="button" id="reset_settings_btn">
-                            <?php _e('Khôi phục mặc định', 'charity-woocommerce'); ?>
+                            Khôi phục mặc định
                         </button>
                     </p>
                 </form>
 
-                <div id="charity-message"></div>
+                <div id="charity-message" class="notice" style="display: none;"></div>
             </div>
         </div>
+
+        <style>
+        .charity-loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        #charity-message {
+            margin: 15px 0;
+            padding: 12px;
+        }
+        #charity-message.success {
+            border-left-color: #00a32a;
+            background: #d4edda;
+            color: #155724;
+        }
+        #charity-message.error {
+            border-left-color: #d63638;
+            background: #f8d7da;
+            color: #721c24;
+        }
+        </style>
         <?php
     }
 
@@ -195,7 +230,7 @@ class CharitySettings {
     private static function count_charity_products() {
         global $wpdb;
 
-        $count = $wpdb->get_var($wpdb->prepare("
+        $count = $wpdb->get_var("
             SELECT COUNT(DISTINCT p.ID)
             FROM {$wpdb->posts} p
             INNER JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id
@@ -203,7 +238,7 @@ class CharitySettings {
             AND p.post_status = 'publish'
             AND pm.meta_key = '_is_charity_campaign'
             AND pm.meta_value = 'yes'
-        "));
+        ");
 
         return intval($count);
     }
@@ -249,30 +284,45 @@ class CharitySettings {
      * AJAX: Lưu cài đặt
      */
     public function ajax_save_settings() {
-        check_ajax_referer('charity_ajax_nonce', 'nonce');
-
-        if (!current_user_can('manage_options')) {
-            wp_send_json_error(__('Bạn không có quyền thực hiện hành động này.', 'charity-woocommerce'));
+        // Verify nonce
+        if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'charity_ajax_nonce')) {
+            wp_send_json_error('Nonce verification failed');
+            return;
         }
 
-        $import_all_products = isset($_POST['import_all_products']) ? 'yes' : 'no';
-        $auto_set_campaign = isset($_POST['auto_set_campaign']) ? 'yes' : 'no';
-        $enable_anonymous_donations = isset($_POST['enable_anonymous_donations']) ? 'yes' : 'no';
-        $default_goal_amount = floatval($_POST['default_goal_amount']) ?: 1000000;
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error('Bạn không có quyền thực hiện hành động này.');
+            return;
+        }
+
+        // Get and sanitize input
+        $import_all_products = isset($_POST['import_all_products']) && $_POST['import_all_products'] === 'yes' ? 'yes' : 'no';
+        $auto_set_campaign = isset($_POST['auto_set_campaign']) && $_POST['auto_set_campaign'] === 'yes' ? 'yes' : 'no';
+        $enable_anonymous_donations = isset($_POST['enable_anonymous_donations']) && $_POST['enable_anonymous_donations'] === 'yes' ? 'yes' : 'no';
+        $default_goal_amount = isset($_POST['default_goal_amount']) ? floatval($_POST['default_goal_amount']) : 1000000;
 
         // Validate default goal amount
         if ($default_goal_amount < 1000) {
-            wp_send_json_error(__('Mục tiêu mặc định phải ít nhất 1,000 VNĐ.', 'charity-woocommerce'));
+            wp_send_json_error('Mục tiêu mặc định phải ít nhất 1,000 VNĐ.');
+            return;
         }
 
-        // Lưu các thiết lập
+        // Save settings
         update_option('charity_import_all_products', $import_all_products);
         update_option('charity_auto_set_campaign', $auto_set_campaign);
         update_option('charity_enable_anonymous_donations', $enable_anonymous_donations);
         update_option('charity_default_goal_amount', $default_goal_amount);
 
+        // Log for debugging
+        error_log('Charity Settings Saved: ' . json_encode(array(
+            'import_all_products' => $import_all_products,
+            'auto_set_campaign' => $auto_set_campaign,
+            'enable_anonymous_donations' => $enable_anonymous_donations,
+            'default_goal_amount' => $default_goal_amount
+        )));
+
         wp_send_json_success(array(
-            'message' => __('Đã lưu cài đặt thành công!', 'charity-woocommerce')
+            'message' => 'Đã lưu cài đặt thành công!'
         ));
     }
 
@@ -280,16 +330,19 @@ class CharitySettings {
      * AJAX: Lấy số lượng sản phẩm cần chuyển đổi
      */
     public function ajax_get_products_count() {
-        check_ajax_referer('charity_ajax_nonce', 'nonce');
+        if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'charity_ajax_nonce')) {
+            wp_send_json_error('Nonce verification failed');
+            return;
+        }
 
         if (!current_user_can('manage_options')) {
-            wp_send_json_error(__('Bạn không có quyền thực hiện hành động này.', 'charity-woocommerce'));
+            wp_send_json_error('Bạn không có quyền thực hiện hành động này.');
+            return;
         }
 
         global $wpdb;
 
-        // Lấy các sản phẩm chưa phải là chiến dịch từ thiện
-        $products = $wpdb->get_results($wpdb->prepare("
+        $products = $wpdb->get_results("
             SELECT p.ID, p.post_title
             FROM {$wpdb->posts} p
             LEFT JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id AND pm.meta_key = '_is_charity_campaign'
@@ -297,16 +350,16 @@ class CharitySettings {
             AND p.post_status = 'publish'
             AND (pm.meta_value IS NULL OR pm.meta_value != 'yes')
             LIMIT 10
-        "));
+        ");
 
-        $total_count = $wpdb->get_var($wpdb->prepare("
+        $total_count = $wpdb->get_var("
             SELECT COUNT(p.ID)
             FROM {$wpdb->posts} p
             LEFT JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id AND pm.meta_key = '_is_charity_campaign'
             WHERE p.post_type = 'product'
             AND p.post_status = 'publish'
             AND (pm.meta_value IS NULL OR pm.meta_value != 'yes')
-        "));
+        ");
 
         wp_send_json_success(array(
             'count' => intval($total_count),
@@ -318,19 +371,22 @@ class CharitySettings {
      * AJAX: Chuyển đổi sản phẩm thành chiến dịch từ thiện
      */
     public function ajax_import_products() {
-        check_ajax_referer('charity_ajax_nonce', 'nonce');
+        if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'charity_ajax_nonce')) {
+            wp_send_json_error('Nonce verification failed');
+            return;
+        }
 
         if (!current_user_can('manage_options')) {
-            wp_send_json_error(__('Bạn không có quyền thực hiện hành động này.', 'charity-woocommerce'));
+            wp_send_json_error('Bạn không có quyền thực hiện hành động này.');
+            return;
         }
 
         $batch_size = 10; // Xử lý 10 sản phẩm mỗi lần
-        $offset = intval($_POST['offset']) ?: 0;
+        $offset = isset($_POST['offset']) ? intval($_POST['offset']) : 0;
         $default_goal = get_option('charity_default_goal_amount', 1000000);
 
         global $wpdb;
 
-        // Lấy các sản phẩm chưa phải là chiến dịch từ thiện
         $products = $wpdb->get_results($wpdb->prepare("
             SELECT p.ID, p.post_title
             FROM {$wpdb->posts} p
@@ -364,83 +420,25 @@ class CharitySettings {
                     $processed++;
                 }
             } catch (Exception $e) {
-                $errors[] = sprintf(__('Lỗi khi chuyển đổi sản phẩm %s: %s', 'charity-woocommerce'), $product_data->post_title, $e->getMessage());
+                $errors[] = sprintf('Lỗi khi chuyển đổi sản phẩm %s: %s', $product_data->post_title, $e->getMessage());
             }
         }
 
-        // Lấy tổng số sản phẩm còn lại cần xử lý
-        $remaining = $wpdb->get_var($wpdb->prepare("
+        $remaining = $wpdb->get_var("
             SELECT COUNT(p.ID)
             FROM {$wpdb->posts} p
             LEFT JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id AND pm.meta_key = '_is_charity_campaign'
             WHERE p.post_type = 'product'
             AND p.post_status = 'publish'
             AND (pm.meta_value IS NULL OR pm.meta_value != 'yes')
-        "));
+        ");
 
         wp_send_json_success(array(
             'processed' => $processed,
             'remaining' => intval($remaining),
             'errors' => $errors,
             'completed' => intval($remaining) === 0,
-            'message' => sprintf(__('Đã chuyển đổi %d sản phẩm. Còn lại %d sản phẩm.', 'charity-woocommerce'), $processed, $remaining)
+            'message' => sprintf('Đã chuyển đổi %d sản phẩm. Còn lại %d sản phẩm.', $processed, $remaining)
         ));
-    }
-
-    /**
-     * Lấy danh sách sản phẩm để preview
-     */
-    public static function get_regular_products_preview($limit = 5) {
-        global $wpdb;
-
-        return $wpdb->get_results($wpdb->prepare("
-            SELECT p.ID, p.post_title, p.post_date
-            FROM {$wpdb->posts} p
-            LEFT JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id AND pm.meta_key = '_is_charity_campaign'
-            WHERE p.post_type = 'product'
-            AND p.post_status = 'publish'
-            AND (pm.meta_value IS NULL OR pm.meta_value != 'yes')
-            ORDER BY p.post_date DESC
-            LIMIT %d
-        ", $limit));
-    }
-
-    /**
-     * Kiểm tra xem có sản phẩm nào cần chuyển đổi không
-     */
-    public static function has_products_to_convert() {
-        $total_products = wp_count_posts('product')->publish;
-        $charity_products = self::count_charity_products();
-
-        return ($total_products > $charity_products);
-    }
-
-    /**
-     * Reset tất cả sản phẩm về trạng thái sản phẩm thường (không phải chiến dịch)
-     */
-    public static function reset_all_products() {
-        global $wpdb;
-
-        // Lấy tất cả sản phẩm là chiến dịch
-        $charity_products = $wpdb->get_results($wpdb->prepare("
-            SELECT p.ID
-            FROM {$wpdb->posts} p
-            INNER JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id
-            WHERE p.post_type = 'product'
-            AND pm.meta_key = '_is_charity_campaign'
-            AND pm.meta_value = 'yes'
-        "));
-
-        $reset_count = 0;
-        foreach ($charity_products as $product_data) {
-            // Xóa các meta của chiến dịch
-            delete_post_meta($product_data->ID, '_is_charity_campaign');
-            delete_post_meta($product_data->ID, '_charity_goal');
-            delete_post_meta($product_data->ID, '_charity_raised');
-
-            $reset_count++;
-        }
-
-        return $reset_count;
     }
 }

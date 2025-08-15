@@ -18,7 +18,7 @@ if (!defined('ABSPATH')) {
 // Define plugin constants
 define('CHARITY_WC_PLUGIN_PATH', plugin_dir_path(__FILE__));
 define('CHARITY_WC_PLUGIN_URL', plugin_dir_url(__FILE__));
-define('CHARITY_WC_VERSION', '1.0.2');
+define('CHARITY_WC_VERSION', '1.0.4');
 
 /**
  * Class chính của plugin
@@ -47,6 +47,7 @@ class CharityWooCommerce {
         require_once CHARITY_WC_PLUGIN_PATH . 'includes/class-charity-campaigns.php';
         require_once CHARITY_WC_PLUGIN_PATH . 'includes/class-charity-donations.php';
         require_once CHARITY_WC_PLUGIN_PATH . 'includes/class-charity-settings.php';
+        require_once CHARITY_WC_PLUGIN_PATH . 'includes/class-charity-frontend.php';
     }
 
     /**
@@ -80,20 +81,11 @@ class CharityWooCommerce {
      */
     public function init_modules() {
         if (class_exists('WooCommerce')) {
-            // Khởi tạo module Campaigns
-
-            // Khởi tạo module Settings
-            CharitySettings::get_instance();
             CharityCampaigns::get_instance();
-
-            // Khởi tạo module Settings
-            CharitySettings::get_instance();
-
-            // Khởi tạo module Donations
-
-            // Khởi tạo module Settings
             CharitySettings::get_instance();
             CharityDonations::get_instance();
+
+            CharityFrontend::get_instance();
         }
     }
 
@@ -133,15 +125,7 @@ class CharityWooCommerce {
             array('CharityCampaigns', 'render_campaigns_page')
         );
 
-        // Submenu Cài đặt
-        add_submenu_page(
-            'charity',
-            __('Cài đặt', 'charity-woocommerce'),
-            __('Cài đặt', 'charity-woocommerce'),
-            'manage_options',
-            'charity-settings',
-            array('CharitySettings', 'render_settings_page')
-        );
+
         // Submenu Ủng hộ
         add_submenu_page(
             'charity',
@@ -150,6 +134,16 @@ class CharityWooCommerce {
             'manage_options',
             'charity-donations',
             array('CharityDonations', 'render_donations_page')
+        );
+
+         // Submenu Cài đặt
+        add_submenu_page(
+            'charity',
+            __('Cài đặt', 'charity-woocommerce'),
+            __('Cài đặt', 'charity-woocommerce'),
+            'manage_options',
+            'charity-settings',
+            array('CharitySettings', 'render_settings_page')
         );
     }
 

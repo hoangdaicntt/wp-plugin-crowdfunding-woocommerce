@@ -45,12 +45,13 @@ jQuery(document).ready(function($) {
         }
 
         // Show loading state
-        $submitBtn.prop('disabled', true).html(charity_ajax.loading_text + ' <span class="charity-loading"></span>');
+        $submitBtn.prop('disabled', true).html('Đang xử lý... <span class="charity-loading"></span>');
 
         // Send AJAX request
         $.ajax({
             url: charity_ajax.ajax_url,
             type: 'POST',
+            dataType: 'json',
             data: formData,
             success: function(response) {
                 if (response.success) {
@@ -61,11 +62,11 @@ jQuery(document).ready(function($) {
                         }, 1500);
                     }
                 } else {
-                    showMessage($message, response.data || charity_ajax.error_text, 'error');
+                    showMessage($message, response.data || 'Có lỗi xảy ra', 'error');
                 }
             },
-            error: function() {
-                showMessage($message, 'Có lỗi xảy ra khi kết nối với server', 'error');
+            error: function(xhr, status, error) {
+                showMessage($message, 'Có lỗi xảy ra khi kết nối với server: ' + error, 'error');
             },
             complete: function() {
                 var buttonText = formAction === 'update' ? 'Cập nhật chiến dịch' : 'Tạo chiến dịch';
@@ -78,7 +79,7 @@ jQuery(document).ready(function($) {
     $(document).on('click', '.delete-campaign-btn', function(e) {
         e.preventDefault();
 
-        if (!confirm(charity_ajax.confirm_delete)) {
+        if (!confirm('Bạn có chắc chắn muốn xóa chiến dịch này?')) {
             return;
         }
 
@@ -91,6 +92,7 @@ jQuery(document).ready(function($) {
         $.ajax({
             url: charity_ajax.ajax_url,
             type: 'POST',
+            dataType: 'json',
             data: {
                 action: 'charity_delete_campaign',
                 nonce: charity_ajax.nonce,
@@ -106,7 +108,7 @@ jQuery(document).ready(function($) {
                         }
                     });
                 } else {
-                    alert(response.data || charity_ajax.error_text);
+                    alert(response.data || 'Có lỗi xảy ra');
                 }
             },
             error: function() {
@@ -138,6 +140,7 @@ jQuery(document).ready(function($) {
         $.ajax({
             url: charity_ajax.ajax_url,
             type: 'POST',
+            dataType: 'json',
             data: {
                 action: 'charity_load_campaigns',
                 nonce: charity_ajax.nonce,
@@ -156,7 +159,7 @@ jQuery(document).ready(function($) {
         });
     }
 
-    // Handle recalculate raised amount button
+    // Handle recalculate raised amount button - FIXED
     $('#recalculate_raised_btn').on('click', function(e) {
         e.preventDefault();
 
@@ -171,18 +174,23 @@ jQuery(document).ready(function($) {
             return;
         }
 
+        console.log('Recalculating for campaign ID:', campaignId); // Debug
+
         // Show loading state
         $btn.prop('disabled', true).html('<span class="charity-loading"></span> Đang tính toán...');
 
         $.ajax({
             url: charity_ajax.ajax_url,
             type: 'POST',
+            dataType: 'json',
             data: {
                 action: 'charity_recalculate_raised',
                 nonce: charity_ajax.nonce,
                 campaign_id: campaignId
             },
             success: function(response) {
+                console.log('Recalculate response:', response); // Debug
+
                 if (response.success) {
                     // Update the input field
                     $input.val(response.data.total_raised);
@@ -195,7 +203,7 @@ jQuery(document).ready(function($) {
                         detailsHtml += '<p><strong>Danh sách ủng hộ gần nhất:</strong></p><ul>';
                         response.data.details.forEach(function(detail) {
                             detailsHtml += '<li>#' + detail.order_id + ' - ' + detail.donor_name + ': ' +
-                                         formatCurrency(detail.amount) + ' (' + detail.date + ')</li>';
+                                formatCurrency(detail.amount) + ' (' + detail.date + ')</li>';
                         });
                         detailsHtml += '</ul>';
 
@@ -219,8 +227,9 @@ jQuery(document).ready(function($) {
                     alert(response.data || 'Có lỗi xảy ra khi tính toán');
                 }
             },
-            error: function() {
-                alert('Có lỗi xảy ra khi kết nối với server');
+            error: function(xhr, status, error) {
+                console.error('Recalculate error:', status, error); // Debug
+                alert('Có lỗi xảy ra khi kết nối với server: ' + error);
             },
             complete: function() {
                 $btn.prop('disabled', false).html('<span class="dashicons dashicons-update-alt"></span> Tính lại từ ủng hộ');
@@ -273,12 +282,13 @@ jQuery(document).ready(function($) {
         };
 
         // Show loading state
-        $submitBtn.prop('disabled', true).html(charity_ajax.loading_text + ' <span class="charity-loading"></span>');
+        $submitBtn.prop('disabled', true).html('Đang xử lý... <span class="charity-loading"></span>');
 
         // Send AJAX request
         $.ajax({
             url: charity_ajax.ajax_url,
             type: 'POST',
+            dataType: 'json',
             data: formData,
             success: function(response) {
                 if (response.success) {
@@ -289,7 +299,7 @@ jQuery(document).ready(function($) {
                         }, 1500);
                     }
                 } else {
-                    showMessage($message, response.data || charity_ajax.error_text, 'error');
+                    showMessage($message, response.data || 'Có lỗi xảy ra', 'error');
                 }
             },
             error: function() {
@@ -306,7 +316,7 @@ jQuery(document).ready(function($) {
     $(document).on('click', '.delete-donation-btn', function(e) {
         e.preventDefault();
 
-        if (!confirm(charity_ajax.confirm_delete)) {
+        if (!confirm('Bạn có chắc chắn muốn xóa khoản ủng hộ này?')) {
             return;
         }
 
@@ -319,6 +329,7 @@ jQuery(document).ready(function($) {
         $.ajax({
             url: charity_ajax.ajax_url,
             type: 'POST',
+            dataType: 'json',
             data: {
                 action: 'charity_delete_donation',
                 nonce: charity_ajax.nonce,
@@ -334,7 +345,7 @@ jQuery(document).ready(function($) {
                         }
                     });
                 } else {
-                    alert(response.data || charity_ajax.error_text);
+                    alert(response.data || 'Có lỗi xảy ra');
                 }
             },
             error: function() {
@@ -373,6 +384,7 @@ jQuery(document).ready(function($) {
         $.ajax({
             url: charity_ajax.ajax_url,
             type: 'POST',
+            dataType: 'json',
             data: {
                 action: 'charity_export_donations',
                 nonce: charity_ajax.nonce
@@ -418,11 +430,11 @@ jQuery(document).ready(function($) {
         $.ajax({
             url: charity_ajax.ajax_url,
             type: 'POST',
-            data: {
+            dataType: 'json',
+            data: Object.assign({
                 action: 'charity_load_donations',
-                nonce: charity_ajax.nonce,
-                ...filters
-            },
+                nonce: charity_ajax.nonce
+            }, filters),
             success: function(response) {
                 if (response.success) {
                     $tbody.html(response.data.html);
@@ -459,7 +471,7 @@ jQuery(document).ready(function($) {
         mediaUploader.on('select', function() {
             var attachment = mediaUploader.state().get('selection').first().toJSON();
             $('#campaign_image_id').val(attachment.id);
-            $('#campaign_image_preview').html('<img src="' + attachment.url + '" alt="Preview" />');
+            $('#campaign_image_preview').html('<img src="' + attachment.url + '" alt="Preview" style="max-width: 150px; height: auto;" />');
             $('#remove_image_button').show();
         });
 
@@ -474,48 +486,6 @@ jQuery(document).ready(function($) {
         $(this).hide();
     });
 
-    // ===== UTILITY FUNCTIONS =====
-
-    // Show message function
-    function showMessage($element, message, type) {
-        $element.removeClass('success error').addClass(type).html(message);
-
-        // Auto hide after 5 seconds
-        setTimeout(function() {
-            $element.fadeOut(function() {
-                $(this).html('').removeClass('success error').show();
-            });
-        }, 5000);
-    }
-
-    // Format currency
-    function formatCurrency(amount) {
-        return new Intl.NumberFormat('vi-VN', {
-            style: 'currency',
-            currency: 'VND'
-        }).format(amount);
-    }
-
-    // Auto-refresh donations list every 60 seconds (optional)
-    if ($('#donations-tbody').length && window.location.href.indexOf('action=') === -1) {
-        setInterval(function() {
-            loadDonations();
-        }, 60000);
-    }
-
-    // Initialize tooltips if available
-    if ($.fn.tooltip) {
-        $('.button-small').tooltip();
-    }
-
-    // Handle enter key in filter inputs
-    $('#filter_date_from, #filter_date_to').on('keypress', function(e) {
-        if (e.which === 13) {
-            e.preventDefault();
-            loadDonations();
-        }
-    });
-
     // ===== SETTINGS MANAGEMENT =====
 
     // Handle settings form submission
@@ -526,8 +496,11 @@ jQuery(document).ready(function($) {
         var $submitBtn = $form.find('button[type="submit"]');
         var $message = $('#charity-message');
 
+        // Clear previous messages
+        $message.removeClass('success error').html('');
+
         // Show loading state
-        $submitBtn.prop('disabled', true).html(charity_ajax.loading_text + ' <span class="charity-loading"></span>');
+        $submitBtn.prop('disabled', true).html('Đang lưu... <span class="charity-loading"></span>');
 
         // Prepare form data
         var formData = {
@@ -539,20 +512,26 @@ jQuery(document).ready(function($) {
             default_goal_amount: $('#default_goal_amount').val() || 1000000
         };
 
+        console.log('Sending settings data:', formData); // Debug
+
         // Send AJAX request
         $.ajax({
             url: charity_ajax.ajax_url,
             type: 'POST',
+            dataType: 'json',
             data: formData,
             success: function(response) {
+                console.log('Settings response:', response); // Debug
+
                 if (response.success) {
-                    showMessage($message, response.data.message, 'success');
+                    showMessage($message, response.data.message || 'Đã lưu cài đặt thành công!', 'success');
                 } else {
-                    showMessage($message, response.data || charity_ajax.error_text, 'error');
+                    showMessage($message, response.data || 'Có lỗi xảy ra khi lưu cài đặt', 'error');
                 }
             },
-            error: function() {
-                showMessage($message, 'Có lỗi xảy ra khi kết nối với server', 'error');
+            error: function(xhr, status, error) {
+                console.error('Settings AJAX Error:', status, error); // Debug
+                showMessage($message, 'Có lỗi xảy ra khi kết nối với server: ' + error, 'error');
             },
             complete: function() {
                 $submitBtn.prop('disabled', false).html('Lưu cài đặt');
@@ -594,6 +573,7 @@ jQuery(document).ready(function($) {
         $.ajax({
             url: charity_ajax.ajax_url,
             type: 'POST',
+            dataType: 'json',
             data: {
                 action: 'charity_import_products',
                 nonce: charity_ajax.nonce,
@@ -618,7 +598,7 @@ jQuery(document).ready(function($) {
                         var totalProcessed = offset + data.processed;
                         var totalRemaining = data.remaining;
                         var totalProducts = totalProcessed + totalRemaining;
-                        var progressPercent = Math.round((totalProcessed / totalProducts) * 100);
+                        var progressPercent = totalProducts > 0 ? Math.round((totalProcessed / totalProducts) * 100) : 100;
 
                         // Update progress bar
                         $progressBar.css('width', progressPercent + '%').text(progressPercent + '%');
@@ -643,8 +623,9 @@ jQuery(document).ready(function($) {
                     $btn.prop('disabled', false);
                 }
             },
-            error: function() {
-                $status.html('<p style="color: #dc3545;">Lỗi kết nối với server</p>');
+            error: function(xhr, status, error) {
+                console.error('Import Error:', status, error);
+                $status.html('<p style="color: #dc3545;">Lỗi kết nối với server: ' + error + '</p>');
                 $btn.prop('disabled', false);
             }
         });
@@ -664,4 +645,80 @@ jQuery(document).ready(function($) {
 
         showMessage($('#charity-message'), 'Đã khôi phục cài đặt mặc định', 'success');
     });
+
+    // ===== UTILITY FUNCTIONS =====
+
+    // Show message function
+    function showMessage($element, message, type) {
+        if (!$element || !$element.length) {
+            console.error('Message element not found');
+            return;
+        }
+
+        $element.removeClass('success error notice').addClass(type);
+        $element.html('<p>' + message + '</p>');
+        $element.show();
+
+        // Auto hide after 5 seconds
+        setTimeout(function() {
+            $element.fadeOut(function() {
+                $(this).html('').removeClass('success error notice').show();
+            });
+        }, 5000);
+    }
+
+    // Format currency
+    function formatCurrency(amount) {
+        return new Intl.NumberFormat('vi-VN', {
+            style: 'currency',
+            currency: 'VND'
+        }).format(amount);
+    }
+
+    // Auto-refresh donations list every 60 seconds (optional)
+    if ($('#donations-tbody').length && window.location.href.indexOf('action=') === -1) {
+        setInterval(function() {
+            loadDonations();
+        }, 60000);
+    }
+
+    // Initialize tooltips if available
+    if ($.fn.tooltip) {
+        $('.button-small').tooltip();
+    }
+
+    // Handle enter key in filter inputs
+    $('#filter_date_from, #filter_date_to').on('keypress', function(e) {
+        if (e.which === 13) {
+            e.preventDefault();
+            loadDonations();
+        }
+    });
+
+    // Add CSS for highlight effect
+    var style = '<style>' +
+        '.highlight-change {' +
+        '    animation: highlight 0.5s ease-in-out;' +
+        '}' +
+        '@keyframes highlight {' +
+        '    0% { background-color: #ffeb3b; }' +
+        '    100% { background-color: transparent; }' +
+        '}' +
+        '.charity-loading {' +
+        '    display: inline-block;' +
+        '    width: 16px;' +
+        '    height: 16px;' +
+        '    border: 2px solid #f3f3f3;' +
+        '    border-top: 2px solid #3498db;' +
+        '    border-radius: 50%;' +
+        '    animation: spin 1s linear infinite;' +
+        '}' +
+        '@keyframes spin {' +
+        '    0% { transform: rotate(0deg); }' +
+        '    100% { transform: rotate(360deg); }' +
+        '}' +
+        '</style>';
+
+    $('head').append(style);
+
 });
